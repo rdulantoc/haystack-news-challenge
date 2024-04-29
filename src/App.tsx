@@ -1,16 +1,29 @@
-import Search from './components/form/search';
-import Layout from './components/layout/layout';
-import { photo } from './components/photo-card/__tests__/mocks';
-import PhotoCard from './components/photo-card/photo-card';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Home from './pages/home/home';
+import Root from './pages/root';
+const queryClient = new QueryClient();
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+    ],
+  },
+]);
 
 function App() {
   return (
-    <Layout>
-      <Search />
-      <ul>
-        <PhotoCard photo={photo} />
-      </ul>
-    </Layout>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 
