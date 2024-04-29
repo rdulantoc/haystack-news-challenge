@@ -1,8 +1,16 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Input } from './input';
 
 const Search = () => {
-  const [searchValue, setSearchValue] = useState('');
+  const { title } = useParams();
+  const navigate = useNavigate();
+  const [, setSearchParams] = useSearchParams();
+  const [searchValue, setSearchValue] = useState(title ?? '');
+
+  useEffect(() => {
+    setSearchValue(title ?? '');
+  }, [title]);
 
   const handleChangeValue = (value: string) => {
     setSearchValue(value);
@@ -10,7 +18,9 @@ const Search = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Submit');
+    navigate('/');
+    setSearchValue('');
+    setSearchParams({ query: searchValue }, { state: { shouldSearch: true } });
   };
 
   return (
