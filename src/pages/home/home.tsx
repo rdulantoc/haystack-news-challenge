@@ -12,6 +12,7 @@ const Home = () => {
   // Intercepts route state
   const { state } = useLocation();
   const [searchParams] = useSearchParams();
+  const query = searchParams.get('query') || '';
   const serializedSearchParams = serializeSearchParams<SearchPhotosParams>(searchParams);
 
   // If shouldSearch is true, execute the useSearchPhotos query, otherwise, execute useGetRandomPhotos
@@ -26,11 +27,11 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>{shouldSearch ? `Search ${searchParams.get('query')}` : 'Home'} - PhotoSearch by Unsplashed</title>
+        <title>{shouldSearch ? `Search ${query} - ` : ''}PhotoSearch by Unsplash</title>
       </Helmet>
       <section>
         <p className="my-4 text-2xl font-bold">{shouldSearch ? 'Results' : 'Trending Photos Right Now'}</p>
-        {isFetching ? <Loading /> : <Results results={results as Random[]} />}
+        {isFetching ? <Loading /> : <Results results={results as Random[]} title={query} />}
       </section>
     </>
   );
