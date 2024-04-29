@@ -13,7 +13,7 @@ const Tag = () => {
   return (
     <>
       <Helmet>
-        <title>{title} - PhotoSearch by Unsplashed</title>
+        <title>Tag {title} - PhotoSearch by Unsplash</title>
       </Helmet>
       <section>
         <p className="my-4 text-2xl font-bold">Results</p>
