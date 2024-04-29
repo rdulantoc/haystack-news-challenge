@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Home - PhotoSearch by Unsplashed</title>
+        <title>{shouldSearch ? `Search ${searchParams.get('query')}` : 'Home'} - PhotoSearch by Unsplashed</title>
       </Helmet>
       <section>
         <p className="my-4 text-2xl font-bold">{shouldSearch ? 'Results' : 'Trending Photos Right Now'}</p>
