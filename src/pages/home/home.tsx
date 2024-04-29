@@ -8,17 +8,19 @@ import { SearchPhotosParams } from '../../lib/api';
 import { serializeSearchParams } from '../../lib/utils';
 
 const Home = () => {
+  // Intercepts route state
   const { state } = useLocation();
   const [searchParams] = useSearchParams();
   const serializedSearchParams = serializeSearchParams<SearchPhotosParams>(searchParams);
 
+  // If shouldSearch is true, execute the useSearchPhotos query, otherwise, execute useGetRandomPhotos
   const shouldSearch = Boolean(state?.shouldSearch);
 
   const { data: random, isFetching: isFetchingRandom } = useGetRandomPhotos(undefined, !shouldSearch);
   const { data: search, isFetching: isFetchingSearch } = useSearchPhotos(serializedSearchParams, shouldSearch);
 
   const results = shouldSearch ? search?.response?.results : random?.response;
-  const isFetching = isFetchingRandom || isFetchingSearch;
+  const isFetching = shouldSearch ? isFetchingSearch : isFetchingRandom;
 
   return (
     <section>

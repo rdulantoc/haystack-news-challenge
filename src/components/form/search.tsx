@@ -20,6 +20,8 @@ const Search = () => {
     e.preventDefault();
     navigate('/');
     setSearchValue('');
+
+    // Sets route state to trigger a search in the home page
     setSearchParams({ query: searchValue }, { state: { shouldSearch: true } });
   };
 
