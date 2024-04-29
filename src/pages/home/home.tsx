@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { Random } from 'unsplash-js/dist/methods/photos/types';
 import Loading from '../../components/loading/loading';
@@ -23,10 +24,15 @@ const Home = () => {
   const isFetching = shouldSearch ? isFetchingSearch : isFetchingRandom;
 
   return (
-    <section>
-      <p className="my-4 text-2xl font-bold">{shouldSearch ? 'Results' : 'Trending Photos Right Now'}</p>
-      {isFetching ? <Loading /> : <Results results={results as Random[]} />}
-    </section>
+    <>
+      <Helmet>
+        <title>{shouldSearch ? `Search ${searchParams.get('query')}` : 'Home'} - PhotoSearch by Unsplashed</title>
+      </Helmet>
+      <section>
+        <p className="my-4 text-2xl font-bold">{shouldSearch ? 'Results' : 'Trending Photos Right Now'}</p>
+        {isFetching ? <Loading /> : <Results results={results as Random[]} />}
+      </section>
+    </>
   );
 };
 
