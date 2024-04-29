@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { GetRandomPhotosParams, getRandomPhotos } from '../lib/api';
 
 export const useGetRandomPhotos = (params?: GetRandomPhotosParams, enabled: boolean = true) => {
-  const query = useQuery({
+  const result = useQuery({
     queryKey: ['random'],
     queryFn: () => getRandomPhotos(params),
     refetchOnWindowFocus: false,
@@ -10,5 +10,5 @@ export const useGetRandomPhotos = (params?: GetRandomPhotosParams, enabled: bool
     enabled: enabled,
   });
 
-  return query;
+  return result;
 };
