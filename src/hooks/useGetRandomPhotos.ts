@@ -5,6 +5,8 @@ export const useGetRandomPhotos = (params?: GetRandomPhotosParams) => {
   const query = useQuery({
     queryKey: ['random'],
     queryFn: () => getRandomPhotos(params),
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 
   return query;
