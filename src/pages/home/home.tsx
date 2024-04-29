@@ -6,7 +6,7 @@ import Results from '../../components/results/results';
 import { useGetRandomPhotos } from '../../hooks/useGetRandomPhotos';
 import { useSearchPhotos } from '../../hooks/useSearchPhotos';
 import { SearchPhotosParams } from '../../lib/api';
-import { serializeSearchParams } from '../../lib/utils';
+import { serializeSearchParams } from '../../utils/serializeSearchParams';
 
 const Home = () => {
   // Intercepts route state
