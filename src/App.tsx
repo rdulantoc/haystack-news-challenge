@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HelmetProvider } from 'react-helmet-async';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Error from './pages/error/error';
 import Home from './pages/home/home';
 import Root from './pages/root';
 import Tag from './pages/tag/tag';
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    errorElement: <Error />,
     children: [
       {
         index: true,
