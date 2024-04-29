@@ -3,6 +3,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/home/home';
 import Root from './pages/root';
+import Tag from './pages/tag/tag';
+
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
@@ -13,6 +15,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: 'tag/:title',
+        element: <Tag />,
       },
     ],
   },
