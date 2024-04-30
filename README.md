@@ -2,6 +2,8 @@
 
 This project consists on a simple web app that allows users to search photos using the Unsplash API.
 
+Feel free to take a look at https://haystack-news-challenge.vercel.app/ :raised_hands:
+
 ## Installation :gear:
 
 #### Prerequisites :clipboard:
