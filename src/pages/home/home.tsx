@@ -1,40 +1,19 @@
 import { Helmet } from 'react-helmet-async';
-import { useLocation, useSearchParams } from 'react-router-dom';
 import { Random } from 'unsplash-js/dist/methods/photos/types';
 import Loading from '../../components/loading/loading';
 import Results from '../../components/results/results';
 import { useGetRandomPhotos } from '../../hooks/useGetRandomPhotos';
-import { useSearchPhotos } from '../../hooks/useSearchPhotos';
-import { SearchPhotosParams } from '../../lib/api';
-import { serializeSearchParams } from '../../utils/serializeSearchParams';
 
 const Home = () => {
-  // Intercepts route state
-  const { state } = useLocation();
-  const [searchParams] = useSearchParams();
-  const query = searchParams.get('query') || '';
-  const serializedSearchParams = serializeSearchParams<SearchPhotosParams>(searchParams);
-
-  /*
-    Checks the route state (using the query as a fallback to support URL sharing) to determine
-    wether the app should execute the useSearchPhotos or the useGetRandomPhotos queries
-  */
-  const shouldSearch = Boolean(state?.shouldSearch) || Boolean(query);
-
-  const { data: random, isFetching: isFetchingRandom } = useGetRandomPhotos(undefined, !shouldSearch);
-  const { data: search, isFetching: isFetchingSearch } = useSearchPhotos(serializedSearchParams, shouldSearch);
-
-  const results = shouldSearch ? search?.response?.results : random?.response;
-  const isFetching = shouldSearch ? isFetchingSearch : isFetchingRandom;
-
+  const { data, isLoading } = useGetRandomPhotos();
   return (
     <>
       <Helmet>
-        <title>{shouldSearch ? `Search ${query} - ` : ''}PhotoSearch by Unsplash</title>
+        <title>PhotoSearch by Unsplash</title>
       </Helmet>
       <section>
-        <p className="my-4 text-2xl font-bold">{shouldSearch ? 'Results' : 'Trending Photos Right Now'}</p>
-        {isFetching ? <Loading /> : <Results results={results as Random[]} title={query} />}
+        <p className="my-4 text-2xl font-bold">Trending Photos Right Now</p>
+        {isLoading ? <Loading /> : <Results results={data?.response as Random[]} />}
       </section>
     </>
   );
