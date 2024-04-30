@@ -24,7 +24,7 @@ const PhotoCard = ({ photo }: PhotoCardProps) => {
         width={photo.width}
         height={photo.height}
       />
-      <footer className="absolute bottom-0 flex w-full flex-wrap justify-between gap-2 bg-black/35 p-2 text-white md:flex-nowrap">
+      <footer className="absolute bottom-0 grid w-full grid-cols-1 justify-between gap-2 bg-black/35 p-2 text-white md:grid-cols-[auto,1fr]">
         <div className="grid w-full">
           <p>
             by <b>{author}</b>
@@ -32,7 +32,7 @@ const PhotoCard = ({ photo }: PhotoCardProps) => {
           <p>Taken on {createdAt}</p>
         </div>
         {photo.tags?.length ? (
-          <ul className="flex w-full items-center justify-end gap-2">
+          <ul className="flex w-full flex-wrap items-center justify-end gap-2">
             {photo.tags.slice(0, MAX_TAGS).map(tag => (
               <TagPill key={tag.title} title={tag.title} type={tag.type} />
             ))}
