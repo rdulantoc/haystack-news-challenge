@@ -5,6 +5,8 @@ export const useSearchPhotos = (params: SearchPhotosParams, enabled: boolean = t
   const result = useQuery({
     queryKey: [`search-${params.query}}`],
     queryFn: () => searchPhotos(params),
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
     enabled: enabled,
   });
 
