@@ -3,7 +3,7 @@ import { SearchPhotosParams, searchPhotos } from '../lib/api';
 
 export const useSearchPhotos = (params: SearchPhotosParams, enabled: boolean = true) => {
   const result = useQuery({
-    queryKey: [`search-${params.query}}`],
+    queryKey: ['search', params.query],
     queryFn: () => searchPhotos(params),
     refetchOnWindowFocus: false,
     refetchOnMount: false,
