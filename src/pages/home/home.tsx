@@ -15,8 +15,11 @@ const Home = () => {
   const query = searchParams.get('query') || '';
   const serializedSearchParams = serializeSearchParams<SearchPhotosParams>(searchParams);
 
-  // If shouldSearch is true, execute the useSearchPhotos query, otherwise, execute useGetRandomPhotos
-  const shouldSearch = Boolean(state?.shouldSearch);
+  /*
+    Checks the route state (using the query as a fallback to support URL sharing) to determine
+    wether the app should execute the useSearchPhotos or the useGetRandomPhotos queries
+  */
+  const shouldSearch = Boolean(state?.shouldSearch) || Boolean(query);
 
   const { data: random, isFetching: isFetchingRandom } = useGetRandomPhotos(undefined, !shouldSearch);
   const { data: search, isFetching: isFetchingSearch } = useSearchPhotos(serializedSearchParams, shouldSearch);
