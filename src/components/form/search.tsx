@@ -1,11 +1,10 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Input } from './input';
 
 const Search = () => {
   const { title } = useParams();
   const navigate = useNavigate();
-  const [, setSearchParams] = useSearchParams();
   const [searchValue, setSearchValue] = useState(title ?? '');
 
   useEffect(() => {
@@ -18,11 +17,7 @@ const Search = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate('/');
-    setSearchValue('');
-
-    // Sets route state to trigger a search in the home page
-    setSearchParams({ query: searchValue }, { state: { shouldSearch: true } });
+    navigate(`/tag/${searchValue}`);
   };
 
   return (
